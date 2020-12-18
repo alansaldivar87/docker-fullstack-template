@@ -6,7 +6,7 @@
 - DB: Redis, Postgres
 - NGINX
 
-## Requiremets
+## Requirements
 Docker needs to be installed on the system.
 
 ## Start
