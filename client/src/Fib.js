@@ -9,21 +9,21 @@ const Fib = () => {
     useEffect(() => {
         fetchValues()
         fetchIndexes()
-    })
+    }, [])
 
     const fetchValues = async () => {
-        const values = await axios('/api/values/current')
+        const values = await axios.get('/api/values/current')
         setValues(values.data)
     }
 
     const fetchIndexes = async () => {
-        const indexes = await axios('/api/values/all')
+        const indexes = await axios.get('/api/values/all')
         setSeenIndexes(indexes.data)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await fetch('/api/values', { method: 'POST', body: index })
+        await axios.post('/api/values', { index })
         setIndex('')
     }
 
@@ -40,8 +40,10 @@ const Fib = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Enter your index:</label>
-                <input onChange={(e) => setIndex(e.target.value)} />
+                <input
+                    placeholder="Enter your index..."
+                    onChange={(e) => setIndex(e.target.value)}
+                />
                 <button>Submit</button>
             </form>
 
